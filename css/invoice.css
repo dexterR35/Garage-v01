@@ -1,0 +1,248 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* container all*/
+
+.invoiceContainer {
+    color: #000000;
+    background-color: #ffffff;
+    margin: auto;
+    padding: 5px;
+}
+
+
+/* invoice h1*/
+
+.invoiceContainer h1 {
+    color: #353535;
+    font-size: 14px;
+    text-align: center;
+}
+
+.invoice-dataClient {
+    margin-left: 30px;
+}
+
+.invoice-dataClient span {
+    text-align: left;
+    width: 52px;
+    margin-right: 10px;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.invoiceCompany {
+    text-align: right;
+    margin-right: 30px;
+}
+
+.topCompany {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    margin: 5px;
+    background-color: #e9ecef;
+    padding: 20px 0;
+    font-size: 14px;
+}
+
+.topCompany:hover {
+    background-color: #353535;
+    color: white
+}
+
+.invoiceTextData {
+    padding: 15px;
+    display: block;
+    background-color: crimson;
+}
+
+
+/*table invoice*/
+
+.invoiceItems textarea {
+    border: 0;
+    font: 14px Georgia, Serif;
+    overflow: hidden;
+    resize: none;
+}
+
+.invoiceItems {
+    width: 100%;
+    margin: auto;
+    background-color: red;
+}
+
+.invoiceItems thead tr th {
+    background: #353535;
+    color: white;
+    padding: 5px;
+}
+
+.invoiceItems tbody tr td {
+    background-color: white;
+    padding: 5px;
+}
+
+.invoiceItems textarea {
+    width: 120px;
+    height: 40px;
+}
+
+.invoiceItems .description {
+    width: 650px;
+}
+
+.price {
+    margin: 0;
+    height: 400px;
+}
+
+.invoiceItems .total-line {
+    text-align: right;
+}
+
+.invoiceItems .total-value {
+    padding: 5px;
+    background-color: rgb(202, 202, 202);
+    font-weight: bold;
+}
+
+.invoiceItems .blank {
+    border: 0;
+}
+
+.invoiceItems textarea {
+    width: 100%;
+    text-align: start;
+    line-height: 2;
+}
+
+textarea:hover,
+textarea:focus,
+.delete:hover {
+    background-color: #353535;
+    color: white;
+}
+
+.status {
+    color: rgb(122, 122, 122);
+    padding: 10px 0;
+    text-align: center;
+    font-size: 11px;
+}
+
+.notice {
+    text-align: center;
+    color: rgb(139, 139, 139);
+}
+
+.signature {
+    background-color: rgb(214, 214, 214);
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.signature h4 {
+    font-size: 14px;
+}
+
+.container-invoiceModal {
+    position: relative;
+    height: 150px;
+}
+
+
+/* main content invoice / modal /side */
+
+.modal-footer,
+.modal-header {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrapperInvoice {
+    padding: 20px;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+}
+
+.main-content {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 25px auto;
+}
+
+.company {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.select-buttons {
+    margin: 18px auto;
+}
+
+.select {
+    padding: 20px;
+    position: relative;
+    left: 70px;
+    top: 170px;
+}
+
+.table-sectionBot {
+    min-width: 100%;
+    padding: 0 100px;
+}
+
+.pagination {
+    float: right;
+}
+
+.pagination li a {
+    font-size: 12px;
+    color: rgb(24, 24, 24);
+}
+
+.pagination li a:hover {
+    background-color: crimson;
+    color: white;
+}
+
+.pagination li.active a,
+.pagination li.active a.page-link {
+    background: #353535;
+}
+
+.pagination li.active a:hover {
+    background: #0669da;
+}
+
+.footer {
+    background-color: #353535;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 15px;
+    text-align: center;
+}
+
+.footer-group {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.footer p {
+    color: #ffffff;
+}

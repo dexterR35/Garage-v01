@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- Icons -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <!--Boostrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-database.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+   https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
+    <link rel="stylesheet" href="/css/invoice.css">
+    <title>Document</title>
+    <script>
+        $(function() {
+            $("#nav-placeholder").load("headernav.html");
+        });
+
+
+
+        var firebaseConfig = {
+            apiKey: "AIzaSyDKh4Vr5ID0sTFJAlSxAU3C6rCWIzEAvzU",
+            authDomain: "xgarage-fa.firebaseapp.com",
+            projectId: "xgarage-fa",
+            storageBucket: "xgarage-fa.appspot.com",
+            messagingSenderId: "1090703272957",
+            appId: "1:1090703272957:web:64473ea5ff1894b33f0794",
+            measurementId: "G-PZEW4M87EC"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        var database = firebase.database();
+        database.ref("users").on("child_added", function(data) {
+            add_data_table(
+                data.val().username,
+                data.val().profile_picture,
+                data.val().email,
+                data.key
+            );
+            var lastkey = data.key;
+            nextkey = parseInt(lastkey) + 1;
+        });
+        database.ref("users").on("child_changed", function(data) {
+            update_data_table(
+                data.val().username,
+                data.val().profile_picture,
+                data.val().email,
+                data.key
+            );
+        });
+        database.ref("users").on("child_removed", function(data) {
+            remove_data_table(data.key);
+        });
+    </script>
+
+    <style>
+        .modal.active {
+            display: block;
+            background-color: rgba(41, 41, 41, 0.486);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="nav-placeholder"></div>
+    </header>
+
+
+
+
+
+    <div class="wrapperInvoice">
+        <div class="searchBar" style="position: relative;text-align: right; right: 100px; top: 30px;">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <input type="text" name="search" id="searchInvoice">
+        </div>
+        <div class="main">
+            <div class="main-contentButtons">
+                <div class="select">
+                    <div class="select-buttons">
+                        <button class="btn" id="btnAdd" href="#invoiceModal">Create Invoice</button>
+                    </div>
+                    <div class="select-buttons">
+                        <button class="btn" href="#invoiceModal">Download</button>
+                    </div>
+                    <div class="select-buttons">
+                        <button class="btn" href="#invoiceModal">Canceled</button>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="company">
+                    <div class="topCompany">
+                        <div class="invoiceCompany" class="clearfix">
+                            <div><b>F&A Motor Repairs</b></div>
+                            <div>Unit 3, Rodney Road<br/> Southsea Works</div>
+                            <div>PO4 8SP</div>
+                            <div>07706951897</div>
+                            <div><a href="mailto:famotorepairs@gmail.com">famotorepairs@gmail.com</a></div>
+                        </div>
+                        <div class="invoice-dataClient">
+                            <div><b>INVOICE TO:</b></div>
+                            <div><span>VEHICLE:</span> #B-333-653</div>
+                            <div><span>CLIENT:</span> Alecu Alexandru</div>
+                            <div><span>ADDRESS:</span> 796 Silver Harbour, TX 79273, US</div>
+                            <div><span>DATE:</span> August 17, 2015</div>
+                            <div><span><b>MILEAGE:</b></span> 250,565</div>
+                        </div>
+                    </div>
+                    <div class="topCompany">
+                        <div class="invoiceCompany" class="clearfix">
+                            <div><b>F&A Motor Repairs</b></div>
+                            <div>Unit 3, Rodney Road<br/> Southsea Works</div>
+                            <div>PO4 8SP</div>
+                            <div>07706951897</div>
+                            <div><a href="mailto:famotorepairs@gmail.com">famotorepairs@gmail.com</a></div>
+                        </div>
+                        <div class="invoice-dataClient">
+                            <div><b>INVOICE TO:</b></div>
+                            <div><span>VEHICLE:</span> #B-333-653</div>
+                            <div><span>CLIENT:</span> Alecu Alexandru</div>
+                            <div><span>ADDRESS:</span> 796 Silver Harbour, TX 79273, US</div>
+                            <div><span>DATE:</span> August 17, 2015</div>
+                            <div><span><b>MILEAGE:</b></span> 250,565</div>
+                        </div>
+                    </div>
+                    <div class="topCompany">
+                        <div class="invoiceCompany" class="clearfix">
+                            <div><b>F&A Motor Repairs</b></div>
+                            <div>Unit 3, Rodney Road<br/> Southsea Works</div>
+                            <div>PO4 8SP</div>
+                            <div>07706951897</div>
+                            <div><a href="mailto:famotorepairs@gmail.com">famotorepairs@gmail.com</a></div>
+                        </div>
+                        <div class="invoice-dataClient">
+                            <div><b>INVOICE TO:</b></div>
+                            <div><span>VEHICLE:</span> #B-333-653</div>
+                            <div><span>CLIENT:</span> Alecu Alexandru</div>
+                            <div><span>ADDRESS:</span> 796 Silver Harbour, TX 79273, US</div>
+                            <div><span>DATE:</span> August 17, 2015</div>
+                            <div><span><b>MILEAGE:</b></span> 250,565</div>
+                        </div>
+                    </div>
+                    <div class="topCompany">
+                        <div class="invoiceCompany" class="clearfix">
+                            <div><b>F&A Motor Repairs</b></div>
+                            <div>Unit 3, Rodney Road<br/> Southsea Works</div>
+                            <div>PO4 8SP</div>
+                            <div>07706951897</div>
+                            <div><a href="mailto:famotorepairs@gmail.com">famotorepairs@gmail.com</a></div>
+                        </div>
+                        <div class="invoice-dataClient">
+                            <div><b>INVOICE TO:</b></div>
+                            <div><span>VEHICLE:</span> #B-333-653</div>
+                            <div><span>CLIENT:</span> Alecu Alexandru</div>
+                            <div><span>ADDRESS:</span> 796 Silver Harbour, TX 79273, US</div>
+                            <div><span>DATE:</span> August 17, 2015</div>
+                            <div><span><b>MILEAGE:</b></span> 250,565</div>
+                        </div>
+                    </div>
+                    <div class="topCompany">
+                        <div class="invoiceCompany" class="clearfix">
+                            <div><b>F&A Motor Repairs</b></div>
+                            <div>Unit 3, Rodney Road<br/> Southsea Works</div>
+                            <div>PO4 8SP</div>
+                            <div>07706951897</div>
+                            <div><a href="mailto:famotorepairs@gmail.com">famotorepairs@gmail.com</a></div>
+                        </div>
+                        <div class="invoice-dataClient">
+                            <div><b>INVOICE TO:</b></div>
+                            <div><span>VEHICLE:</span> #B-333-653</div>
+                            <div><span>CLIENT:</span> Alecu Alexandru</div>
+                            <div><span>ADDRESS:</span> 796 Silver Harbour, TX 79273, US</div>
+                            <div><span>DATE:</span> August 17, 2015</div>
+                            <div><span><b>MILEAGE:</b></span> 250,565</div>
+                        </div>
+                    </div>
+                    <div class="topCompany">
+                        <div class="invoiceCompany" class="clearfix">
+                            <div><b>F&A Motor Repairs</b></div>
+                            <div>Unit 3, Rodney Road<br/> Southsea Works</div>
+                            <div>PO4 8SP</div>
+                            <div>07706951897</div>
+                            <div><a href="mailto:famotorepairs@gmail.com">famotorepairs@gmail.com</a></div>
+                        </div>
+                        <div class="invoice-dataClient">
+                            <div><b>INVOICE TO:</b></div>
+                            <div><span>VEHICLE:</span> #B-333-653</div>
+                            <div><span>CLIENT:</span> Alecu Alexandru</div>
+                            <div><span>ADDRESS:</span> 796 Silver Harbour, TX 79273, US</div>
+                            <div><span>DATE:</span> August 17, 2015</div>
+                            <div><span><b>MILEAGE:</b></span> 250,565</div>
+                        </div>
+                    </div>
+                    <div class="topCompany">
+                        <div class="invoiceCompany" class="clearfix">
+                            <div><b>F&A Motor Repairs</b></div>
+                            <div>Unit 3, Rodney Road<br/> Southsea Works</div>
+                            <div>PO4 8SP</div>
+                            <div>07706951897</div>
+                            <div><a href="mailto:famotorepairs@gmail.com">famotorepairs@gmail.com</a></div>
+                        </div>
+                        <div class="invoice-dataClient">
+                            <div><b>INVOICE TO:</b></div>
+                            <div><span>VEHICLE:</span> #B-333-653</div>
+                            <div><span>CLIENT:</span> Alecu Alexandru</div>
+                            <div><span>ADDRESS:</span> 796 Silver Harbour, TX 79273, US</div>
+                            <div><span>DATE:</span> August 17, 2015</div>
+                            <div><span><b>MILEAGE:</b></span> 250,565</div>
+                        </div>
+                    </div>
+                    <div class="topCompany">
+                        <div class="invoiceCompany" class="clearfix">
+                            <div><b>F&A Motor Repairs</b></div>
+                            <div>Unit 3, Rodney Road<br/> Southsea Works</div>
+                            <div>PO4 8SP</div>
+                            <div>07706951897</div>
+                            <div><a href="mailto:famotorepairs@gmail.com">famotorepairs@gmail.com</a></div>
+                        </div>
+                        <div class="invoice-dataClient">
+                            <div><b>INVOICE TO:</b></div>
+                            <div><span>VEHICLE:</span> #B-333-653</div>
+                            <div><span>CLIENT:</span> Alecu Alexandru</div>
+                            <div><span>ADDRESS:</span> 796 Silver Harbour, TX 79273, US</div>
+                            <div><span>DATE:</span> August 17, 2015</div>
+                            <div><span><b>MILEAGE:</b></span> 250,565</div>
+                        </div>
+                    </div>
+                    <div class="topCompany">
+                        <div class="invoiceCompany" class="clearfix">
+                            <div><b>F&A Motor Repairs</b></div>
+                            <div>Unit 3, Rodney Road<br/> Southsea Works</div>
+                            <div>PO4 8SP</div>
+                            <div>07706951897</div>
+                            <div><a href="mailto:famotorepairs@gmail.com">famotorepairs@gmail.com</a></div>
+                        </div>
+                        <div class="invoice-dataClient">
+                            <div><b>INVOICE TO:</b></div>
+                            <div><span>VEHICLE:</span> #B-333-653</div>
+                            <div><span>CLIENT:</span> Alecu Alexandru</div>
+                            <div><span>ADDRESS:</span> 796 Silver Harbour, TX 79273, US</div>
+                            <div><span>DATE:</span> August 17, 2015</div>
+                            <div><span><b>MILEAGE:</b></span> 250,565</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-sectionBot">
+                    <div>
+                        <ul class="pagination">
+                            <li class="page-item"><a href="#" class="page-link">Previous</a></li>
+                            <li class="page-item"><a href="#" class="page-link">1</a></li>
+                            <li class="page-item"><a href="#" class="page-link">2</a></li>
+                            <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                            <li class="page-item"><a href="#" class="page-link">4</a></li>
+                            <li class="page-item"><a href="#" class="page-link">5</a></li>
+                            <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-invoiceModal">
+            <div class="modal" tabindex="-1" id="invoiceModal" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">F&A Motor Repairs Invoice</h5>
+                            <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="invoiceContainer">
+                                <h1>INVOICE</h1>
+                                <div>Invoice Number: <b>#356</b></div>
+                                <div class="topCompany">
+                                    <div class="invoiceCompany" class="clearfix">
+                                        <div><b>F&A Motor Repairs</b></div>
+                                        <div>Unit 3, Rodney Road<br/> Southsea Works</div>
+                                        <div>PO4 8SP</div>
+                                        <div>07706951897</div>
+                                        <div><a href="mailto:famotorepairs@gmail.com">famotorepairs@gmail.com</a></div>
+                                    </div>
+                                    <div class="invoice-dataClient">
+                                        <div><b>INVOICE TO:</b></div>
+                                        <div><span>VEHICLE:</span> #B-333-653</div>
+                                        <div><span>CLIENT:</span> Alecu Alexandru</div>
+                                        <div><span>ADDRESS:</span> 796 Silver Harbour, TX 79273, US</div>
+                                        <div><span>DATE:</span> August 17, 2015</div>
+                                        <div><span><b>MILEAGE:</b></span> 250,565</div>
+                                    </div>
+                                </div>
+                                <div class="invoiceTextData">
+
+                                </div>
+                                <table class="invoiceItems">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Description</th>
+                                            <th>Unit Cost</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="item-row">
+                                            <td class="item-name">
+
+                                            </td>
+
+                                            <td class="description"><textarea id="txtName">enter details</textarea></td>
+                                            <input type="hidden" id="txtType" />
+                                            <input type="hidden" id="txtKey" />
+                                            <td><textarea class="cost" id="txtEmail">650</textarea></td>
+                                            <td><textarea class="qty" id="txtPic">1</textarea></td>
+                                            <td><span class="price" id="txtPrice">650</span></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="2" class="blank"> </td>
+                                            <td colspan="2" class="total-line">Subtotal</td>
+                                            <td class="total-value">
+                                                <div id="subtotal">650.00</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="blank"> </td>
+                                            <td colspan="2" class="total-line">Total</td>
+                                            <td class="total-value">
+                                                <div id="total">650.00</div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                                <hr>
+                                <div class="signature">
+                                    <h4>Signature:</h4>
+
+                                </div>
+                                <div class="notice">
+                                    <div>A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+                                </div>
+                                <div class="status">
+                                    Invoice was created on a computer and is valid without the signature and seal.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div>
+                                <button type="button" class="btn" id="btnPrint">Print</button>
+                                <button type="button" class="btn" id="btnDownload">Download</button>
+                            </div>
+                            <div>
+                                <button type="button" class="btn" id="addrow">Add Row</button>
+                                <button type="button" class="btn" id="removerow">Delete Row</button>
+                            </div>
+                            <div>
+                                <button type="button" class="btn" id="btnSave">Save changes</button>
+                                <button type="button" class="btn" id="btnClose">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal -->
+        </div>
+
+    </div>
+    <!-- Section Footer-->
+    <div class="footer">
+        <div class="footer-group col-md-3">
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus expedita placeat beatae sed. Saepe, quisquam.</p>
+            <button type="button" class="btn">apphere</button>
+        </div>
+        <div class="footer-group col-md-3">
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus expedita placeat beatae sed. Saepe, quisquam.</p>
+            <button type="button" class="btn">apphere</button>
+        </div>
+        <div class="footer-group col-md-3">
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus expedita placeat beatae sed. Saepe, quisquam.</p>
+            <button type="button" class="btn">apphere</button>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+
+            $('#addrow').click(function() {
+                $('.item-row:last').after('<tr class="item-row"><td class="item-name"><textarea>2</textarea></td><td class="description"><textarea>Item Description</textarea></td><td><textarea class="cost">0</textarea></td><td><textarea class="qty">0</textarea></td><td><span class="price">0</span></td> </tr>')
+                bind();
+            })
+            bind();
+
+            function bind() {
+                $('.cost').blur(update_price);
+                $('.qty').blur(update_price);
+            }
+
+
+            function update_price() {
+                var row = $(this).parents('.item-row');
+                var cost = row.find('.cost').val();
+                var qty = row.find('.qty').val();
+                row.find('.price').html(Number(qty) * Number(cost));
+                update_total()
+            }
+
+            function update_total() {
+
+                var total = 0;
+                $('.price').each(function(i) {
+                    price = $(this).html();
+                    if (price > 0) {
+                        total += Number(price);
+                    }
+                })
+
+                $('#subtotal').html(total);
+                $('#total').html(total);
+            }
+            $('.delete').live('click', function() {
+                $(this).parents('.item-row').remove();
+                update_total();
+
+            })
+        })
+
+
+        function getData() {
+            database.ref("/users/").once("value").then(
+                function(snapshot) {
+                    let object = snapshot.val();
+                    let array = Object.keys(object);
+                    $(".result").html("");
+
+                },
+                function(error) {
+                    if (error) {
+                        console.log("write error : ", error);
+                    } else {
+                        console.log("successfully");
+                    }
+                }
+            );
+        }
+
+        function add_data_table(name, pic, email, key) {
+            $("#card-list").append(
+                '<div class="column is-3" id="' +
+                key +
+                '"><div class="card"><div class="card-image"><figure class="image is-4by3"><img src="' +
+                pic +
+                '"></figure></div><div class="card-content"><div class="media"><div class="media-content"><p class="title is-4">' +
+                name +
+                '</p><p class="subtitle is-6">@' +
+                email +
+                '</p></div></div></div><footer class="card-footer"><a href="#" data-key="' + key + '" class="card-footer-item btnEdit">Edit</a><a href="#" class="card-footer-item btnRemove"  data-key="' + key +
+                '">Remove</a></footer></div></div>'
+            );
+        }
+
+        function update_data_table(name, pic, email, key) {
+            $("#card-list #" + key).html(
+                '<div class="card"><div class="card-image"><figure class="image is-4by3"><img src="' +
+                pic +
+                '"></figure></div><div class="card-content"><div class="media"><div class="media-content"><p class="title is-4">' +
+                name +
+                '</p><p class="subtitle is-6">@' +
+                email +
+                '</p></div></div></div><footer class="card-footer"><a href="#" class="card-footer-item btnEdit"  data-key="' +
+                key +
+                '">Edit</a><a  data-key="' +
+                key +
+                '" href="#" class="card-footer-item btnRemove">Remove</a></footer></div>'
+            );
+        }
+
+        function remove_data_table(key) {
+            $("#card-list #" + key).remove();
+        }
+
+        function new_data(name, email, pic, key) {
+            database.ref("users/" + key).set({
+                username: name,
+                email: email,
+                profile_picture: pic
+            });
+        }
+
+        function update_data(name, email, pic, key) {
+            database.ref("users/" + key).update({
+                username: name,
+                email: email,
+                profile_picture: pic
+            });
+        }
+        $("#btnAdd").click(function() {
+            $("#txtName").val("");
+            $("#txtEmail").val("");
+            $("#txtPic").val("");
+            $("#txtType").val("N");
+            $("#txtKey").val("0");
+            $('#invoiceModal').addClass("active");
+
+        });
+        $('.close').click(function() {
+            $('#invoiceModal').removeClass("active");
+        });
+        $("#btnSave").click(function() {
+            if ($("#txtType").val() == "N") {
+                database.ref("users").once("value").then(function(snapshot) {
+                    if (snapshot.numChildren() == 0) {
+                        nextkey = 1;
+                    }
+                    new_data(
+                        $("#txtName").val(),
+                        $("#txtEmail").val(),
+                        $("#txtPic").val(),
+                        nextkey
+                    );
+                });
+            } else {
+                update_data(
+                    $("#txtName").val(),
+                    $("#txtEmail").val(),
+                    $("#txtPic").val(),
+                    $("#txtKey").val()
+                );
+            }
+            $("#btnClose").click();
+        });
+        $(document).on("click", ".btnEdit", function(event) {
+            event.preventDefault();
+            key = $(this).attr("data-key");
+            database.ref("users/" + key).once("value").then(function(snapshot) {
+                $("#txtName").val(snapshot.val().username);
+                $("#txtEmail").val(snapshot.val().email);
+                $("#txtPic").val(snapshot.val().profile_picture);
+                $("#txtType").val("E");
+                $("#txtKey").val(key);
+            });
+            $("#modal").addClass("is-active");
+        });
+        $(document).on("click", ".btnRemove", function(event) {
+            event.preventDefault();
+            key = $(this).attr("data-key");
+            database.ref("users/" + key).remove();
+        });
+
+        $("#btnClose,.btnClose").click(function() {
+            $("#modal").removeClass("is-active");
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+ https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
+
+
+</body>
+
+</html>

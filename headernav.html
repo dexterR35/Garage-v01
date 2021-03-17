@@ -1,0 +1,168 @@
+<style>
+    .header {
+        display: flex;
+        background-color: #3b5998;
+        padding: 2px;
+        align-items: center;
+        height: 70px;
+    }
+    
+    .header-nav {
+        text-align: center;
+    }
+    
+    .logo {
+        display: flex;
+        justify-content: center;
+        color: white;
+        max-width: fit-content;
+        margin: auto;
+    }
+    
+    img {
+        max-height: 40px;
+    }
+    
+    .textlogo {
+        font-size: 16px;
+        position: relative;
+        top: 17px;
+        right: 10px;
+    }
+    
+    .logoTime {
+        text-align: center;
+    }
+    
+    .clock {
+        color: #ffffff;
+        font-size: 20px;
+        font-family: Orbitron;
+        letter-spacing: 4px;
+        border-radius: 3px;
+        width: 75%;
+    }
+    
+    .btndiv button i {
+        font-size: 12px;
+        margin-right: 3px;
+    }
+    
+    .iconGroupTopNav {
+        padding: 5px;
+        font-size: 18px;
+    }
+    
+    .itemsNav {
+        border-radius: 10px;
+    }
+    
+    .itemsNav ul {
+        margin: auto;
+        padding: 16px;
+    }
+    
+    .itemsNav ul li {
+        list-style: none;
+        display: inline-flex;
+        text-align: center;
+        background-color: #3b5998;
+    }
+    
+    .itemsNav ul li a {
+        text-decoration: none;
+        padding: 0 15px;
+        font-size: 13px;
+        color: white;
+        display: flex;
+        align-items: center;
+    }
+    
+    .itemsNav ul li a:hover {
+        transition: 0.3s ease;
+        background-color: #f7f7f7;
+        text-decoration: none;
+        border-radius: 4%;
+        color: black;
+    }
+</style>
+
+<body>
+    <div class="topText" style="display:flex; justify-content: center; padding: 3px;  background-color:#dfe3ee; color:#010A0E;">
+        <h4 class="telnrtop" style="margin: 2px 30px 0; font-size: 14px; text-align: end;"> <i class="fas fa-phone-alt fa-md fa-fw" aria-hidden="true" style="margin-right: 5px;"></i>+44 765 965 154 89
+        </h4>
+    </div>
+    <header class="header">
+        <div class="logo col-md-2">
+            <img src="./png/Logo3.png" alt="logo">
+            <h4 class="textlogo">Motor <b>Repairs</b></h4>
+        </div>
+        <div class="header-nav col-md-8">
+            <div class="itemsNav">
+                <ul>
+                    <li>
+                        <a href="./index.html">
+                            <div class="iconGroupTopNav">
+                                <i class="fa fa-home" aria-hidden="true"></i>
+                            </div>
+                            <div class="text"><span data-text="Home">Home</span></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./InvoiceAdd.html">
+                            <div class="iconGroupTopNav">
+                                <i class="fas fa-comment-dollar" aria-hidden="true"></i>
+                            </div>
+                            <div class="text"><span data-text="Invoice">Invoice</span></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="iconGroupTopNav">
+                                <i class="fas fa-car-crash" aria-hidden="true"></i>
+                            </div>
+                            <div class="text"><span data-text="Contact">Contact</span></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./admin.html">
+                            <div class="iconGroupTopNav">
+                                <i class="fas fa-cogs" aria-hidden="true"></i>
+                            </div>
+                            <div class="text"><span data-text="Admin">Admin</span></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="logoTime col-md-2">
+            <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+        </div>
+    </header>
+    <script>
+        function showTime() {
+            var date = new Date();
+            var h = date.getHours(); // 0 - 23
+            var m = date.getMinutes(); // 0 - 59
+            var s = date.getSeconds(); // 0 - 59
+            var session = "AM";
+
+            if (h == 0) {
+                h = 12;
+            }
+
+            if (h > 12) {
+                h = h - 12;
+                session = "PM";
+            }
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+            var time = h + ":" + m + ":" + s + " " + session;
+            document.getElementById("MyClockDisplay").innerText = time;
+            document.getElementById("MyClockDisplay").textContent = time;
+            setTimeout(showTime, 1000);
+        }
+        showTime();
+    </script>
+</body>

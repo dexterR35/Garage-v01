@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <!--Boostrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!--ref css -->
+    <link rel="stylesheet" href="css/index.css" type="text/css">
+
+    <title>Motor Repair</title>
+</head>
+<script>
+    $(function() {
+        $("#nav-placeholder").load("headernav.html");
+    });
+</script>
+
+
+<body>
+    <header>
+        <div id="nav-placeholder"></div>
+    </header>
+    <!-- Wrapper-main -->
+    <div class="wrapper">
+        <br>
+        <h2>Contact<b> Management</b></h2>
+        <!--table customers-->
+        <div class="tableDiv">
+            <div class="customers-container col-md-12">
+                <div class="col-md-3">
+                    <button type="button" class="btn-all" id="myBtn">ADD CONTACT</button>
+                </div>
+                <div class="customers-btn col-md-6">
+                    <button class="btn-alternative btn" type="button" data-toggle="modal" data-target="#myModal"><i class="fas fa-car" aria-hidden="true"  id="sendSms"></i> Send SMS</button>
+                    <button class="btn-alternative btn" type="button" data-toggle="modal" data-target="#myModal2"><i class="fas fa-car" aria-hidden="true"  id="sendMail"></i> Send Mail</button>
+                    <button class="btn-alternative btn" type="button"><i class="fas fa-car" aria-hidden="true"></i> Calculator</button>
+                    <button class="btn-alternative btn" type="button" data-toggle="modal" data-target="#myModal3"><i class="fas fa-car" aria-hidden="true" id="converterButton"></i> Converter</button>
+                    <button class="btn-alternative btn" type="button"><i class="fas fa-car" aria-hidden="true "></i> <a href="./invoice.html"></a> Create Invoice</button>
+                    <button class="btn-alternative btnExportMe btn" type="button"><i class="fas fa-car" aria-hidden="true"></i> Export to XL</button>
+                </div>
+                <div class="searchDiv col-md-3">
+                    <input type="search" id="search_input" class="searchInput">
+                    <button class="btn-all" type="button"> Search</button>
+                </div>
+            </div>
+            <table class="table table-hover styled-table">
+                <thead>
+                    <tr>
+                        <th class="column">ID</th>
+                        <th class="column">First Name</th>
+                        <th class="column">Last Name</th>
+                        <th class="column">Phone</th>
+                        <th colspan="1" class="column">Email</th>
+                        <th class="column">Vehicle Model</th>
+                        <th class="column">Vehicle Type</th>
+                        <th class="column">MOT Date</th>
+                        <th class="column">MOT Expired</th>
+                        <th class="column">CamBelt</th>
+                        <th class="column">Cambelt Exp/Miles</th>
+                        <th class="column">Miles Next Service</th>
+                        <th class="column">Registration Nr</th>
+                        <th colspan="3" class="column" style="text-align: center;">Edit</th>
+                    </tr>
+                </thead>
+                <tbody id="ex-table">
+                </tbody>
+                <tbody id="contactList">
+                </tbody>
+
+                <tr></tr>
+
+            </table>
+            <div class="containesr">
+                <h1>Product Store Application
+                    <br/><small><em>e-sMart</em></small>
+                </h1>
+                <!-- add user module -->
+                <section id="add-user-module">
+                    <button id="open-add-user-form-btn ">Add Products</button>
+                    <form method="post" name="formMproducts">
+                        <h2>Add User</h2>
+                        <div class="form-group">
+                            <label for="name">Product Name</label>
+                            <input type='text' id="name" data-key='name' class='product-input  form-control' required placeholder="enter full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Price</label>
+                            <input type='number' id="price" data-key='price' class='product-input  form-control' required placeholder="enter a value">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Quantity</label>
+                            <input type='number' id="quantity" data-key='quantity' class='product-input form-control' required placeholder="how many">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">onStock</label>
+                            <input type='number' id="onstock" data-key='onstock' class='product-input  form-control' pattern="onstock" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="info">Details</label>
+                            <textarea class="product-input form-control" id="details" data-key='details' name="info" id="pInfo" rows="3"></textarea>
+                        </div>
+                        <button type='button' id="add-user-btn">Save Product</button>
+                        <div class=".alert"></div>
+                    </form>
+                </section>
+                <!-- edit user module -->
+                <section id="edit-user-module">
+                    <form>
+                        <h2>Edit user</h2>
+                        <input type="hidden" class="edit-userid">
+                        <br>
+                        <label for="name">Product Name</label>
+                        <input type='text' data-key='name' class='edit-product form-control'>
+                        <br>
+                        <label for="name">Price</label>
+                        <input type='text' data-key='price' class='edit-product form-control'>
+                        <br>
+                        <label for="name">Quantity</label>
+                        <input type='text' data-key='quantity' class='edit-product form-control'>
+                        <label for="name">Onstock</label>
+                        <input type='text' data-key='quantity' class='edit-product  form-control'>
+                        <label for="name">Details</label>
+                        <input type='text' data-key='quantity' class='edit-product form-control'>
+                        <button type='button' id="edit-user-btn">save</button>
+                    </form>
+                </section>
+                <!-- show user module -->
+                <ul id="productList"></ul>
+                <div id="productDetail"></div>
+
+            </div>
+            <div class="table-sectionBot">
+                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries
+                </div>
+                <div>
+                    <ul class="pagination">
+                        <li class="page-item disabled"><a href="#">Previous</a></li>
+                        <li class="page-item "><a href="#" class="page-link">1</a></li>
+                        <li class="page-item "><a href="#" class="page-link">2</a></li>
+                        <li class="page-item active "><a href="#" class="page-link">3</a></li>
+                        <li class="page-item "><a href="#" class="page-link">4</a></li>
+                        <li class="page-item "><a href="#" class="page-link">5</a></li>
+                        <li class="page-item "><a href="#" class="page-link">Next</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="productsList">
+            <h1>hey</h1>
+        </div>
+        <!--Modal-Customers-->
+        <div class="modal fade" id="myModalContact" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4><span></span> Contact Information</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!--FORM -->
+                        <form class="needs-validation" id="contactForm" method="">
+                            <div class="formCards">
+                                <!-- Contact Registration-->
+                                <h2 class="h2Contact"><b>Contact</b> Information</h2>
+                                <div class="IdContainer col-md-12">
+                                    <div class="KeyId">
+                                        <div class="keyText" id="keytext2"></div>
+                                    </div>
+                                    <div class="succesMess">
+                                        <div class="success-message" style="display:none;">Nice Work, Amigo!</div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 inputWithIcon">
+                                        <input type="text" class="form-control validationCustom" placeholder="First name" id="fname" data-key="fname">
+                                        <i class="fas fa-user fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-6 inputWithIcon">
+                                        <input type="text" class="form-control validationCustom" placeholder="Last name" id="lname" data-key="lname">
+                                        <i class="fas fa-user fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-12 inputWithIcon">
+                                        <input type="text" class="form-control validationCustom" placeholder="Addresss" id="address" data-key="address">
+                                        <i class="fas fa-address-card fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-4 inputWithIcon">
+                                        <input type="text" class="form-control validationCustom" placeholder="Country" id="country" data-key="country">
+                                        <i class="fas fa-globe-europe fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-4 inputWithIcon">
+                                        <input type="text" class="form-control validationCustom" placeholder="City/Town" id="city" data-key="city">
+                                        <i class="fas fa-building fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-4 inputWithIcon">
+                                        <input type="text" class="form-control validationCustom" placeholder="Area Code" id="areaCode" data-key="areaCode">
+                                        <i class="fas fa-arrow-right fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-6 inputWithIcon">
+                                        <input type="number" class="form-control validationCustom" placeholder="Phone" id="phone" data-key="phone">
+                                        <i class="fas fa-phone-alt fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-6 inputWithIcon">
+                                        <input type="datetime-local" class="form-control validationCustom" placeholder="date" id="dataEntry" data-key="dataEntry">
+                                        <i class="fas fa-calendar-alt fa-md fa-fw " aria-hidden="true "></i>
+                                    </div>
+                                    <div class="form-group col-md-12 inputWithIcon">
+                                        <input type="email" class="form-control validationCustom" placeholder="@email" id="contactEmail" data-key="contactEmail">
+                                        <i class="fas fa-envelope fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="formgroup">
+                                    <label for="myCheck">Checkbox:</label>
+                                    <input type="checkbox" id="myCheck">
+                                    <div class="myCheck2" style="display: none;">check the box!</div>
+                                </div>
+                            </div>
+
+                            <hr>
+                            <!-- Vehicle-->
+                            <div class="formCards" id="showVsehicle">
+                                <!--Forms inputs-->
+                                <h2 class="h2Contact"><b>Vehicle</b> Information</h2>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 inputWithIcon">
+                                        <input type="text" class="form-control validationCustom" placeholder="Registration nr" id="registrationNr">
+                                        <i class="fa fa-sort-numeric-up-alt fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-6 inputWithIcon">
+                                        <input type="text" class="form-control validationCustom" placeholder="VIN nr." id="vinNr">
+                                        <i class="fa fa-sort-numeric-down-alt fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-4 inputWithIcon">
+                                        <input type="text" class="form-control validationCustom" placeholder="Model" id="vehicleModel">
+                                        <i class="fas fa-car-alt fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-4 inputWithIcon">
+                                        <input type="text" class="form-control validationCustom" placeholder="Type" id="vehicleType">
+                                        <i class="fas fa-car fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-4 inputWithIcon">
+                                        <input type="text" class="form-control validationCustom" placeholder="Miles On-board" id="vehicleMilesOnBoard">
+                                        <i class="fas fa-caret-right fa-md fa-fw" aria-hidden="true "></i>
+                                    </div>
+                                    <div class="form-group col-md-4 inputWithIcon">
+                                        <input type="text" class="form-control validationCustom" placeholder="Fuel Type" id="vehicleFuelType">
+                                        <i class="fas fa-gas-pump fa-md fa-fw" aria-hidden="true "></i>
+                                    </div>
+                                    <div class="form-group col-md-4 inputWithIcon">
+                                        <input type="text" class="form-control validationCustom" placeholder="Engine" id="vehicleEngineType">
+                                        <i class="fas fa-cogs fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-4 inputWithIcon">
+                                        <input type="number" class="form-control validationCustom" placeholder="Year" id="vehicleYear">
+                                        <i class="fas fa-radiation fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-6 inputWithIcon">
+                                        <input type="date" class="form-control validationCustom" placeholder="MOT Date" id="vehicleMotDate">
+                                        <i class="fas fa-calendar-check fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-6 inputWithIcon">
+                                        <input type="text" class="form-control validationCustom" placeholder="MOT Expired" id="vehicleMotExpired">
+                                        <i class="fas fa-calendar-times fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-6 inputWithIcon">
+                                        <input type="text" class="form-control valueMiles8k" placeholder="Cam Belt /Mi/Km" id="vehicleCamBelt">
+                                        <i class="fas fa-calendar-check fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-3 inputWithIcon">
+                                        <input type="text" class="form-control resultMiles" placeholder="+80,000 miles" id="vehicleCamBeltExpiredMiles">
+                                        <i class="fas fa-calendar-check fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-3 inputWithIcon">
+                                        <input type="text" class="form-control validationCustom" placeholder="+4 years" id="vehicleCamBeltExpiredYears">
+                                        <i class="fas fa-calendar-check fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-4 inputWithIcon">
+                                        <input type="text" class="form-control validationCustom" placeholder="Next Service /Mi/Km" id="vehicleNextService">
+                                        <i class="fas fa-calendar-times fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="form-group col-md-8 inputWithIcon">
+                                        <input type="text" class="form-control validationCustom" placeholder="More info About Vehicle" id="vehicleMoreInfo">
+                                        <i class="fas fa-exclamation-circle fa-md fa-fw" aria-hidden="true"></i>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btndiv">
+                            <button class="btn-all btnSaveMe" type="button" id="btnSaveContact"><i class="fas fa-save" aria-hidden="true"></i> Save Me</button>
+                            <button class="btn-all btnSaveMe" type="submit" id="btnClose" data-dismiss="modal"><i class="fas fa-save" aria-hidden="true"></i> Close</button>
+                            <button class="btn-all btnSaveMe" type="submit" id="resetContact"><i class="fas fa-save" aria-hidden="true"></i> Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modddals">
+            <!-- Modal sms -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <form>
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Send SMS</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <input type="number" class="form-control validationCustom" placeholder="Mobile Number" required>
+                                </div>
+                                <div class="form-group">
+                                    <textarea name="smsArea" id="SmsArea" cols="25" rows="4" class="form-control" style="resize: none; padding: 10px; border-radius: 5px;border: 1px solid #ccc; outline: none;" placeholder="Auto Text" readonly></textarea>
+                                </div>
+                                <button class="btnXl btn-sm" type="button" data-dismiss="modal"><i class="fas fa-edit" aria-hidden="true "></i> Edit Text</button>
+                                <button class="btnXl btn-sm" type="button" data-dismiss="modal"><i class="fas fa-envelope-open-text" aria-hidden="true "></i> Send</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal Mail -->
+            <div class="modal fade" id="myModal2" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Send Mail</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="email" class="form-control validationCustom" placeholder="@Email" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea name="smsArea" id="SmsArea" cols="25" rows="4" class="form-control" style="resize: none; padding: 10px; border-radius: 5px;border: 1px solid #ccc; outline: none;" placeholder="Auto Text" readonly></textarea>
+                            </div>
+                            <button class="btnXl btn-sm" type="button" data-dismiss="modal"><i class="fas fa-edit" aria-hidden="true"></i> Edit Text</button>
+                            <button class="btnXl btn-sm" type="button" data-dismiss="modal"><i class="fas fa-envelope-open-text" aria-hidden="true"></i> Send</button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="myModal3" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Converter</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="number" id="milesConv" class="form-control" placeholder="Km to Miles" oninput="MileskmConverter(this.value)" onchange="MileskmConverter(this.value)" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==7) return false;">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" id="milesConv" class="form-control" placeholder="Km to Miles" oninput="MilesTkmConverter(this.value)" onchange="MilesTkmConverter(this.value)" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==7) return false;">
+                            </div>
+                            <div class="outputCalculator">
+                                <p class="miles">
+                                    Miles:<span id="outputMiles"></span>
+                                </p>
+                                <button class="btnXl btn-sm" type="button" data-dismiss="modal"><i class="fas fa-edit" aria-hidden="true"></i> Edit Text</button>
+                                <button class="btnXl btn-sm" type="button" data-dismiss="modal"><i class="fas fa-envelope-open-text" aria-hidden="true"></i> Send</button>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Section Footer-->
+
+    <div class="footer">
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
+
+    <script src="/js/script.js"></script>
+
+
+
+
+
+
+
+</body>
+
+</html>
+
+
+
+<!-- sa anunte cu o sapt mai devreme MOT (client_mail.sms 
+    -operator intr o magina  eme MOT (client_mail.sms -operator intr o magina )-->

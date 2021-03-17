@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <!--Boostrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!--ref css -->
+    <link rel="stylesheet" href="./css/invoice.css" type="text/css">
+    <link rel="stylesheet" href="./css/index.css" type="text/css">
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>-->
+    <title>Invoice</title>
+</head>
+
+<body>
+    <div class="topText" style="display:flex; justify-content: center; padding: 3px;  background-color:crimson; color:white;">
+        <h4 class="telnrtop" style="margin: 2px 30px 0; font-size: 14px; text-align: end;"> <i class="fas fa-phone-alt fa-md fa-fw" aria-hidden="true" style="margin-right: 5px;"></i>+44 765 965 154 89
+        </h4>
+    </div>
+    <header class="header">
+        <div class="logo col-md-2">
+            <img src="./png/Logo3.png" alt="logo">
+            <h4 class="textlogo">Motor <b>Repairs</b></h4>
+        </div>
+        <div class="header-nav col-md-8">
+            <div class="itemsNav">
+                <ul>
+                    <li>
+                        <a href="./index.html">
+                            <div class="iconGroupTopNav">
+                                <i class="fa fa-home" aria-hidden="true"></i>
+                            </div>
+                            <div class="text"> <span data-text="Home ">Home</span></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./invoice.html">
+                            <div class="iconGroupTopNav">
+                                <i class="fas fa-comment-dollar" aria-hidden="true"></i>
+                            </div>
+                            <div class="text"> <span data-text="Invoice">Invoice</span></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./">
+                            <div class="iconGroupTopNav">
+                                <i class="far fa-address-card" aria-hidden="true"></i>
+                            </div>
+                            <div class="text"><span data-text="services">Customers</span></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="iconGroupTopNav">
+                                <i class="fas fa-car-crash" aria-hidden="true"></i>
+                            </div>
+                            <div class="text"><span data-text="Portflio">Contact</span></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./admin.html">
+                            <div class="iconGroupTopNav">
+                                <i class="fas fa-cogs" aria-hidden="true"></i>
+                            </div>
+                            <div class="text"><span data-text="Contact">Admin</span></div>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+        <div class="logoTime col-md-2">
+            <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+        </div>
+    </header>
+    <br>
+    <div class="invoiceContainer">
+        <h1>INVOICE</h1>
+        <div>Invoice Number: <b>#356</b></div>
+        <div class="topCompany">
+            <div class="invoiceCompany" class="clearfix">
+                <div><b>F&A Motor Repairs</b></div>
+                <div>Unit 3, Rodney Road<br/> Southsea Works</div>
+                <div>PO4 8SP</div>
+                <div>07706951897</div>
+                <div><a href="mailto:alecuSmecheru@gmail.com">alecuSmecheru@gmail.com</a></div>
+            </div>
+            <div class="invoice-dataClient">
+                <div><b>INVOICE TO:</b></div>
+                <div><span>VEHICLE:</span> #B-333-653</div>
+                <div><span>CLIENT:</span> Alecu Alexandru</div>
+                <div><span>ADDRESS:</span> 796 Silver Harbour, TX 79273, US</div>
+                <div><span>DATE:</span> August 17, 2015</div>
+                <div><span><b>MILEAGE:</b></span> 250,565</div>
+            </div>
+        </div>
+        <div class="invoiceTextData">
+            <h6></h6>
+        </div>
+        <table class="invoiceItems">
+            <thead>
+                <tr>
+                    <th>#Nr</th>
+                    <th>Description</th>
+                    <th>Unit Cost</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="item-row">
+                    <td class="item-name">
+                        <div class="delete-wpr">
+                            <textarea>10</textarea><a class="delete" href="javascript:;" title="Remove row">X</a>
+                        </div>
+                    </td>
+                    <td class="description"><textarea>enter details</textarea></td>
+                    <td><textarea class="cost">650</textarea></td>
+                    <td><textarea class="qty">1</textarea></td>
+                    <td><span class="price">650</span></td>
+                </tr>
+                <tr id="hiderow">
+                    <td colspan="5"><a id="addrow" href="javascript:;" title="Add a row">Add a row</a></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="blank"> </td>
+                    <td colspan="2" class="total-line">Subtotal</td>
+                    <td class="total-value">
+                        <div id="subtotal">650.00</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="blank"> </td>
+                    <td colspan="2" class="total-line">Total</td>
+                    <td class="total-value">
+                        <div id="total">650.00</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <div class="notice">
+            <div>A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+        </div>
+    </div>
+    <footer>
+        Invoice was created on a computer and is valid without the signature and seal.
+    </footer>
+    <hr>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#addrow').click(function() {
+                $('.item-row:last').after('<tr class="item-row"><td class="item-name"><div class="delete-wpr"><textarea>2</textarea><a class="delete" href="javascript:;" title="Remove row">X</a></div></td> <td class="description"><textarea>Item Description </textarea></td><td><textarea class="cost">0</textarea></td><td><textarea class="qty">0</textarea></td><td><span class="price">0</span></td> </tr>')
+                bind();
+            })
+            bind();
+
+            function bind() {
+                $('.cost').blur(update_price);
+                $('.qty').blur(update_price);
+            }
+
+            function update_price() {
+                var row = $(this).parents('.item-row');
+                var cost = row.find('.cost').val();
+                var qty = row.find('.qty').val();
+                row.find('.price').html(Number(qty) * Number(cost));
+                update_total()
+            }
+
+            function update_total() {
+                var total = 0;
+                $('.price').each(function(i) {
+                    price = $(this).html();
+                    if (price > 0) {
+                        total += Number(price);
+                    }
+                })
+                $('#subtotal').html(total);
+                $('#total').html(total);
+            }
+            $('.delete').live('click', function() {
+                $(this).parents('.item-row').remove();
+                update_total();
+            })
+        })
+    </script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+<!--cand fac factura ,sa aleg intre mail si print 
+sa pot da cancel la factura .sa ramana salvata. si sa scrie cancel pe ea
+
+ivoice date modificare  si factura proforma-->
+
+</html>
