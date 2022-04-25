@@ -249,7 +249,7 @@ var reverseString = function() {
     reset[7].reset();
     output.innerHTML = "";
   }, 3000);
-}
+};
 
 var oddPositiveNumbers = function() {
   /*Tema 9
@@ -268,7 +268,7 @@ var oddPositiveNumbers = function() {
     reset[8].reset();
     output.innerHTML = "";
   }, 3000);
-}
+};
 
 var xInArray = document.getElementById("xInArray").onclick = function() {
   /*Tema 10
@@ -288,13 +288,13 @@ var xInArray = document.getElementById("xInArray").onclick = function() {
       }
     }
     output.innerHTML = x + ' nu apartine vectorului.';
-  }
+  };
   checkXInArray();
   setTimeout(function() {
     reset[9].reset();
     output.innerHTML = "";
   }, 3000);
-}
+};
 
 var maxOfArray = function(arr) {
   /*Tema 11
@@ -314,7 +314,7 @@ var maxOfArray = function(arr) {
     reset[10].reset();
     output.innerHTML = "";
   }, 3000);
-}
+};
 
 var sumMaxMinArray = function(arr) {
   /*Tema 12
@@ -340,7 +340,7 @@ var sumMaxMinArray = function(arr) {
     reset[11].reset();
     output.innerHTML = "";
   }, 3000);
-}
+};
 
 var doubleInArray = function(arr) {
   /*Tema 13
@@ -363,7 +363,7 @@ var doubleInArray = function(arr) {
     reset[12].reset();
     output.innerHTML = "";
   }, 3000);
-}
+};
 
 var produsOfArray = function(arr) {
   /*Tema 14
@@ -381,7 +381,7 @@ var produsOfArray = function(arr) {
     reset[13].reset();
     output.innerHTML = "";
   }, 3000);
-}
+};
 
 
 var palindrom = function(palindromString) {
@@ -402,4 +402,4 @@ var palindrom = function(palindromString) {
     reset[14].reset();
     output.innerHTML = "";
   }, 3000);
-}
+};
